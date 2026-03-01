@@ -142,7 +142,20 @@ namespace OOPsUnitTesting
             //Assert
             Assert.Equal(expectedBonus, sut.CalculateBonus(years));
         }
-        
+
+        [Fact]
+        public void Successfully_Alter_Name_Via_ChangeName()
+        {
+            //Arrange
+            Person sut = new Person("Don", 70);
+
+            //Act
+            sut.ChangeName("Bob");
+
+            //Assert
+           
+            Assert.Equal("Bob", sut.Name);
+        }
         #endregion
 
         #region Testing with Invalid data

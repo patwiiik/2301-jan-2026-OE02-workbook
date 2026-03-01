@@ -303,5 +303,11 @@ namespace LearningObjects
                 throw new ArgumentException($"The wage {newwage} is invalid. Wage must be 0 or greater.", "Wage");
             Wage = newwage;
         }
+
+        public void ChangeName(string name)
+        {
+            ArgumentNullException.ThrowIfNullOrWhiteSpace(name, "name");
+            Name = name;
+        }
     }
 }

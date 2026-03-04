@@ -50,6 +50,7 @@ namespace SQLiteDemos.System.Services
             // using the ValidatorHelper class method
             ValidatorHelper.Validate(person);
 
+            // _context.People.Add(person);
             await _context.People.AddAsync(person);
             await _context.SaveChangesAsync();
         }

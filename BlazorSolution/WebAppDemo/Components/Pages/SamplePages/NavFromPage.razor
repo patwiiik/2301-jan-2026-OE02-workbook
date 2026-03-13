@@ -20,7 +20,10 @@
                     to execute
 *@
 <ActionButton Label="Go To ...." OnClick="NavToPageMethod" ButtonStyle="btn-outline-success"/>
+&nbsp;&nbsp;
+<ActionButton Label="Go To With ...." OnClick="NavToPageMethodWith" ButtonStyle="btn-outline-success" />
 @code {
+    private int someValue = 23;
 
     //with our software not all available functionality is defaulted to your app
     //if you wish to use available functionality then what you need to do is to inject
@@ -38,5 +41,12 @@
         //the method argument is the routing name of the page
         //  to which you wish to go
         navManager.NavigateTo("/lesson22b");
+    }
+
+    private void NavToPageMethodWith()
+    {
+        //the method argument is the routing name of the page
+        //  to which you wish to go
+        navManager.NavigateTo($"/lesson22b/{someValue}");
     }
 }

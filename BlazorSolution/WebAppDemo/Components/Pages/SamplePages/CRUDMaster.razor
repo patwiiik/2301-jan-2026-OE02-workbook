@@ -24,59 +24,43 @@
 
 <AssessmentForm OnAdd="StoreMark" />
 
-@*
-    quick dump of the collection
-*@
-@if (_assessments.Count > 0)
-{
-    <br/><br/>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h3>Assessment Marks</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="offset-2 col-md-8">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Assessment</th>
-                        <th>Weight</th>
-                        <th>Earned Mark</th>
-                        <th>Maximum Mark</th>
-                        <th>Weighted Mark</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in _assessments)
-                    {
-                        <tr>
-                            <td>@item.Name</td>
-                            <td>@item.Weight</td>
-                            <td>@item.Mark</td>
-                            <td>@item.MaxMark</td>
-                            <td>@item.WeightedMark</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <p>There are no marks on file.</p>
-        </div>
-    </div>
-}
+<AssessmentList _assessments="_assessments" OnRemove="RemoveMark" />
+
 
 
 @code {
     //an instance of List<T> where T is the entity
     //the initial creation of the list will result in an empty instance
     public List<Assessment> _assessments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        /*
+        * this method is a internal method step in processing your
+        *      blazor component page
+        * this method is execute each time the page appears for the
+        *      first time
+        * this method ONLY executes on the first time
+        *
+        * Recommendation: do not remove the base class called for
+        *      the method
+        * There are base functions that should be executed
+        * Your custom setup should be done after the base execution
+        * The override would not cause the base execution to happen
+        * By leaving the base call in, you ensure that any base action
+        *      is done AND any future software updates to the base action
+        *      is done
+        */
+    base.OnInitializedAsync();
+
+            /*
+             * Add any of your own page intialization
+             */
+        _assessments.Add(new Assessment { Name="Lab 1", Weight=5, Mark=2, MaxMark = 5 });
+        _assessments.Add(new Assessment { Name="Lab 2", Weight=5, Mark=5, MaxMark = 5 });
+        _assessments.Add(new Assessment { Name="Lab 3", Weight=5, Mark=12, MaxMark = 14 });
+        _assessments.Add(new Assessment { Name="TakeHome 1", Weight=20, Mark=17, MaxMark = 25 });
+    }
 
     //where is the parameter value coming from
     //it will be sent to this method from the called component
@@ -87,5 +71,8 @@ else
         _assessments.Add(mark);
     }
 
-
+    public void RemoveMark(Assessment mark)
+    {
+        _assessments.Remove(mark);
+    }
 }

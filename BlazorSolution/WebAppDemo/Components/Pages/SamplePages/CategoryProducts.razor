@@ -1,6 +1,11 @@
 ﻿@page "/categoryproducts"
 <PageTitle>Category Products</PageTitle>
 @rendermode InteractiveServer
+
+@*
+    using clause that point to require services
+        and entities located in the class library
+*@
 @using WestWindSystem.Models;
 @using WestWindSystem.BLL;
 
@@ -32,6 +37,11 @@
     <div class="col-md-12">
         <label for="catlist">Select Product Category:</label>
         &nbsp;&nbsp;
+        @*
+            this is the html basic drop down list control
+            note this is NOT the EditForm type control called InputSelect
+            there the binding is using @bind
+        *@
         <select id="catlist" @bind="CategoryId">
             <option value="0">select category ...</option>
             @foreach(var cat in categoryList)

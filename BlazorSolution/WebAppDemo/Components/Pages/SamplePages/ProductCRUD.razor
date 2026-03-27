@@ -203,11 +203,6 @@
         categoryList = await _categoryServices.Category_GetAll();
         supplierList = await _supplierServices.Supplier_GetAll();
 
-        //setup editcontext relationship to form instance currentProduct
-        //setup ValidationMessageStore instance for the EditContext
-        editContext = new EditContext(currentProduct);
-        validationMessageStore = new ValidationMessageStore(editContext);
-
     }
 
     private string CurrentAction;
@@ -216,6 +211,10 @@
 
     private async Task HandleAction(EditContext context)
     {
+        //setup editcontext relationship to form instance currentProduct
+        //setup ValidationMessageStore instance for the EditContext
+        editContext = context;
+        validationMessageStore = new ValidationMessageStore(context);
 
         if (CurrentAction.Equals("Delete"))
         {
@@ -223,6 +222,8 @@
         }
         else
         {
+            //cause the data annotation validation in your entity to execute
+            //manual activation of the DataAnnotationsValidator
             if (context.Validate())
             {
                 switch (CurrentAction)
@@ -248,6 +249,8 @@
 
         try
         {
+            //custom validation that is NOT in the entity for whatever reason
+            //this validation is "Did the user do something on the form, not against data"
             if (currentProduct.CategoryID == 0)
             {
                 //                 construction of the validation message store command

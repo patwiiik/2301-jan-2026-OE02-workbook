@@ -1,0 +1,25 @@
+﻿@page "/hello"
+
+@* add this using class to obtain your device information*@
+@using Microsoft.Maui.Devices
+
+<PageTitle>Hello</PageTitle>
+
+<h3>Hello</h3>
+
+<p> Here is an example of adding a windows emoji to your text. 🎉 😁</p>
+<p>
+    <ol>
+        <li>Enter some text</li>
+        <li>press your window key on the keyboard + . at the same time</li>
+        <li>this should bring up your emoji window</li>
+        <li>use either the search to find emoji (Party) OR scroll through the emojis yourself</li>
+    </ol>
+</p>
+
+<p>this is a Razor page running inside a native app</p>
+<p><strong>Platform:</strong>@DeviceInfo.Current.Platform</p>
+<p><strong>OS:</strong>@DeviceInfo.Current.VersionString</p>
+@code {
+
+}

@@ -1,0 +1,64 @@
+﻿@page "/binding-demo"
+<PageTitle>Various Bindings</PageTitle>
+<h3>Binding Demo</h3>
+
+<h4>Simple Automatic Binding Example</h4>
+@*
+    basic binding learned in Blazor
+     input bound to variable
+           type data into input control
+           data to Hello does not appear yet
+           tab out of input control, data is transferred to variable
+                and name is displayed in hello xxxx
+    
+
+         key point: data is not move until leaving the control
+                    data change --> UI (Hello) display is changed
+                                    wherever name variable is used
+                    this is considered as automatic binding
+*@
+<input @bind="name" />
+<p>Hello @name</p>
+
+<h4>One-Way vs Two-Way binding</h4>
+
+@*
+    this is a varient of display like Hello above
+    the data flows only from variable to output even though the
+        data is display in an input control
+    this is One-Way
+
+    @bind forms two way travel
+    try typing in the bound control
+        string changes only in this control even after tabbing off the bound input control
+    
+    this is a common error in beginner programmers
+    it is useful to display a piece of data in the Model with no fear of any change to
+        the display, changing the Model
+*@
+<input value="@name" />
+
+<br/>
+<h4>What can @@bind expand to?</h4>
+<p>do a bind via an event handler to do "live" immediate update </p>
+@*
+    to fix the value input control, you could use the tradional @bind on control
+        however, change would not happen until after tabbing off control
+    to have immediate UI visibility, use an event handler such as oninput
+        in your binding
+    as you enter data into the control watch the other controls change
+        on each inputted characters without waiting to tab off
+
+    This bind is considered manual binding
+        value=@name displays the current value of the variable (Model)
+        @oninput listens for user typing
+        e represents the event arguments (ChangeEventArgs)
+        e.Value?.ToString() gets the typed input as a string
+        The result is assigned back to name
+*@
+<input value="@name" @oninput="(e => name = e.Value?.ToString())" />
+
+@code {
+    @* Model *@
+    private string name = "";
+}

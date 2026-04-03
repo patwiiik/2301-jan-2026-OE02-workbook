@@ -1,0 +1,29 @@
+﻿@page "/instructordemo"
+<PageTitle> Live Preview Form</PageTitle>
+
+<h3>Live Preview Form</h3>
+
+<p>What happens when one uses automatic binding @@bind and 
+    manual binding using the event @@bind:event="oninput"
+</p>
+
+<p>@@bind is automatic --> you just choose when it updates by tabbing off control</p>
+<p>@@bind:event="...." --> updates depending on the event such as oninput (as user types)</p>
+<p>Long story short: Automatic two-way binding with real-time updates<br />
+    There is no additional "final" update on tabbing off the control <br/>
+    The update to the Model only happens when a character is entered</p>
+
+@* form native controls*@
+<label>Name:</label>
+<input @bind="name" @bind:event="oninput"/>
+<br/><br/>
+<label>Favourite Color:</label>
+<input @bind="favouriteColor" @bind:event="oninput" />
+<br/><br/>
+
+<p> You entered: @name, whose favourite color is: @favouriteColor</p>
+
+@code {
+    private string name = "";
+    private string favouriteColor = "";
+}
